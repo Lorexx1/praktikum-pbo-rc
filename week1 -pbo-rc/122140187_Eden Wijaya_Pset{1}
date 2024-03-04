@@ -1,0 +1,45 @@
+import random
+
+class Game_Robot:
+    def __init__(self, nama_robot_1, nama_robot_2, darah_robot):
+        self.nama_robot_1 = nama_robot_1
+        self.nama_robot_2 = nama_robot_2
+        self.darah_robot = darah_robot
+        self.sisa_darah_robot_1 = darah_robot
+        self.sisa_darah_robot_2 = darah_robot
+        self.maksimal_kekuatan_serangan = 50
+        self.babak = 0
+    
+    def sisa_darah(self, nama_robot, sisa_darah):
+        print(f"sisa darah {nama_robot} : {sisa_darah}")
+        
+    def mulai_game(self):
+        print("PERTANDINGAN DIMULAI")
+        while self.sisa_darah_robot_1 > 0 and self.sisa_darah_robot_2 > 0:
+            self.babak += 1
+            print(f"\nround : {self.babak}")
+            serangan_robot_1 = random.randint(1, 100)
+            serangan_robot_2 = random.randint(1, 100)
+            
+            if serangan_robot_1 <= self.maksimal_kekuatan_serangan:
+                self.sisa_darah_robot_2 = self.sisa_darah_robot_2 - serangan_robot_1
+                print(f"{self.nama_robot_1} memberi serangan kepada {self.nama_robot_2} sebesar {serangan_robot_1}")
+            else:
+                print(f"{self.nama_robot_1} gagal melakukan serangan kepada {self.nama_robot_2}")
+                
+            if serangan_robot_2 <= self.maksimal_kekuatan_serangan:
+                self.sisa_darah_robot_1 = self.sisa_darah_robot_1 - serangan_robot_2
+                print(f"{self.nama_robot_2} memberi serangan kepada {self.nama_robot_1} sebesar {serangan_robot_2}")
+            else:
+                print(f"{self.nama_robot_2} gagal melakukan serangan kepada {self.nama_robot_1}")
+            
+            self.sisa_darah(self.nama_robot_1, self.sisa_darah_robot_1)
+            self.sisa_darah(self.nama_robot_2, self.sisa_darah_robot_2)
+            
+            if self.sisa_darah_robot_1 <= 0:
+                print(f"\n{self.nama_robot_2} menang")
+            elif self.sisa_darah_robot_2 <= 0:
+                print(f"\n{self.nama_robot_1} menang")
+
+game = Game_Robot("Ranger Merah", "Cacing Alaska", 100)
+game.mulai_game() 
