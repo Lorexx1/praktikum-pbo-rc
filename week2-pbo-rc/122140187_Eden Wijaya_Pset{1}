@@ -1,1 +1,61 @@
+import random
 
+class ayah:
+    def __init__(self):
+        self.golongan_darah_ayah = ()
+        
+    def darah_ayah(self):
+        self.golongan_darah_ayah = str(input("masukan golongan darah ayah : "))
+
+class ibu:
+    def __init__(self):
+        self.golongan_darah_ibu = ()
+        
+    def darah_ibu(self):
+        self.golongan_darah_ibu = str(input("masukan golongan darah ibu : "))
+        
+class anak:
+    def __init__(self, ayah, ibu):
+        self.ayah = ayah
+        self.ibu = ibu
+        self.alel_ayah = ()
+        self.alel_ibu = ()
+        self.golongan_darah_anak = ("tidak ada")
+    
+    def alel(self):
+        self.alel_ayah = random.choice(self.ayah.golongan_darah_ayah)
+        self.alel_ibu = random.choice(self.ibu.golongan_darah_ibu)
+        
+    def darah_anak(self):
+        golongan_darah = [self.alel_ayah, self.alel_ibu]
+        golongan_darah.sort()
+        if golongan_darah == ['A', 'A']:
+            self.golongan_darah_anak = 'A'
+        elif golongan_darah == ['A', 'B']:
+            self.golongan_darah_anak = 'AB'
+        elif golongan_darah ==  ['A', 'O']:
+            self.golongan_darah_anak = 'A'
+        elif golongan_darah == ['B', 'B']:
+            self.golongan_darah_anak = 'B'
+        elif golongan_darah ==  ['B', 'O']:
+            self.golongan_darah_anak = 'B'
+        elif golongan_darah ==  ['O', 'O']:
+            self.golongan_darah_anak = 'O'
+        elif 'AB' in golongan_darah:
+            self.golongan_darah_anak = 'AB'
+        else:
+            print("golongan darah macam apa itu")
+            
+golongan_ayah = ayah()
+golongan_ibu = ibu()
+golongan_anak = anak(golongan_ayah, golongan_ibu)
+
+golongan_ayah.darah_ayah()
+golongan_ibu.darah_ibu()
+golongan_anak.alel()
+golongan_anak.darah_anak()
+
+print("")
+print(f"golongan darah ayah adalah  {golongan_ayah.golongan_darah_ayah}")
+print(f"golongan darah ibu adalah {golongan_ibu.golongan_darah_ibu}")
+print(f"golongan darah anak adalah {golongan_anak.golongan_darah_anak}")
