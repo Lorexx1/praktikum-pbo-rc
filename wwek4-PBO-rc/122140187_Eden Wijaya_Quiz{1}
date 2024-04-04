@@ -1,0 +1,48 @@
+import random
+
+class minesweeper:
+    def __init__(self):
+        self.papan_game = [['?' for _ in range(3)] for _ in range(3)]
+        self.lokasi_bom = (random.randint(0,2), random.randint(0, 2))
+        self.kalah = False
+        
+    def layout_papan(self):
+        for i in range (3):
+            for j in range (3):
+                if self.papan_game[i][j] == '!':
+                    print(" ! ", end="")
+                else:
+                    print(f" {self.papan_game[i][j]} ", end="")
+                if j < 2:
+                    print("|", end="")
+            print ()
+            if i < 2:
+                print ("-----------")
+        
+    def cek_nilai(self, baris, kolom):
+        if baris < 0 or baris > 2 and kolom < 0 or kolom > 2:
+            print("")
+            print ("mohon masukan nilai yang tepat!!!")
+            return False
+        return True
+    
+    def mulai_game(self):
+        while not self.kalah:
+            self.layout_papan()
+            baris = int(input("masukan nilai baris (o sampai 2) : "))
+            kolom = int(input("masukan nilai kolom (0 sampai 2) : "))
+            print("")
+            
+            if not self.cek_nilai(baris, kolom):
+                continue
+            
+            if (baris, kolom) != self.lokasi_bom:
+                print ("permainan berlanjut")
+                self.papan_game[baris][kolom] = 0
+            else:
+                print ("anda menabrak bom, permainan berakhir")
+                self.papan_game[baris][kolom] = 'X'
+                self.kalah = True
+
+game = minesweeper()
+game.mulai_game()
