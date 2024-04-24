@@ -1,0 +1,82 @@
+import tkinter as tk
+from tkinter import messagebox
+
+class LogReg:
+    def __init__(self, pesan):
+        self.pesan = pesan
+        self.pesan.title("Login dan Register")
+        
+        self.frame_login = tk.Frame(self.pesan)
+        self.frame_register = tk.Frame(self.pesan)
+        
+        self.create_login()
+        self.create_register()
+
+        self.show_login()
+
+    def create_login(self):
+        self.login_label = tk.Label(self.frame_login, text="LOGIN", font=(50))
+        self.login_label.pack(pady=10)
+        
+        self.username_label = tk.Label(self.frame_login, text="USERNAME")
+        self.username_label.pack()
+        self.username_entry = tk.Entry(self.frame_login)
+        self.username_entry.pack()
+        
+        self.pw_label = tk.Label(self.frame_login, text="PASSWORD")
+        self.pw_label.pack()
+        self.pw_entry = tk.Entry(self.frame_login, show="*")
+        self.pw_entry.pack()
+        
+        self.tombol_login = tk.Button(self.frame_login, text="LOGIN", command=self.login)
+        self.tombol_login.pack(pady=10)
+        
+        self.tombol_register = tk.Button(self.frame_login, text="REGISTER", command=self.show_register)
+        self.tombol_register.pack(pady=10)
+        
+    def create_register(self):
+        self.register_label = tk.Label(self.frame_register, text="REGISTER", font=(50))
+        self.register_label.pack(pady=10)
+        
+        self.R_username_label = tk.Label(self.frame_register, text="USERNAME")
+        self.R_username_label.pack()
+        self.R_username_entry = tk.Entry(self.frame_register)
+        self.R_username_entry.pack()
+        
+        self.R_pw_label = tk.Label(self.frame_register, text="PASSWORD")
+        self.R_pw_label.pack()
+        self.R_pw_entry = tk.Entry(self.frame_register, show="*")
+        self.R_pw_entry.pack()
+        
+        self.tombol_register = tk.Button(self.frame_register, text="REGISTER", command=self.register)
+        self.tombol_register.pack(pady=10)
+        
+        self.tombol_login = tk.Button(self.frame_register, text="LOGIN", command=self.show_login)
+        self.tombol_login.pack(pady=10)
+        
+    def show_login(self):
+        self.frame_register.pack_forget()
+        self.frame_login.pack()
+
+    def show_register(self):
+        self.frame_login.pack_forget()
+        self.frame_register.pack()
+        
+    def login(self):
+        username = self.username_entry.get()
+        pw = self.pw_entry.get()
+        
+        if username == "siuuu" and pw == "siuuu juga":
+            messagebox.showinfo("login berhasil", "SELAMAT DATANG")
+        else :
+            messagebox.showerror("kesalahan masukan", "MOHON MASUKAN AKUN YANG BENAR")
+            
+    def register(self):
+        R_username = self.R_username_entry.get()
+        R_pw = self.R_pw_entry.get()
+        messagebox.showinfo("Register", f"register berhasil : {R_username}")
+        
+root = tk.Tk()
+app = LogReg(root)
+root.geometry('370x250')
+root.mainloop()
